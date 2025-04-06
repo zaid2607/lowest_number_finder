@@ -1,0 +1,30 @@
+name: Find Lowest Number Tests
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+    
+    - name: Test Multiple Numbers
+      run: |
+        python3 find_lowest_number.py test_data/test1_input.txt out1.txt
+        diff out1.txt test_data/test1_expected.txt
+    
+    - name: Test Single Number
+      run: |
+        python3 find_lowest_number.py test_data/test2_input.txt out2.txt
+        diff out2.txt test_data/test2_expected.txt
+    
+    - name: Test Empty File
+      run: |
+        python3 find_lowest_number.py test_data/test3_input.txt out3.txt
+        diff out3.txt test_data/test3_expected.txt
